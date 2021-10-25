@@ -3,4 +3,9 @@ project(CourseWork)
 
 set(CMAKE_CXX_STANDARD 20)
 
-add_executable(CourseWork main.cpp DataMatrix/DataMatrix.cpp)
+include_directories(DataMatrix) # там ищем исходники
+add_subdirectory(DataMatrix)    # там создаем подпроект (библиотеку)
+
+add_executable(CourseWork main.cpp)
+
+target_link_libraries(CourseWork data_matrix)   # подключаем библиотеку к программе
