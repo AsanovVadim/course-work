@@ -48,8 +48,7 @@ size_t DataMatrix::DependentVarInd() const {
 }
 
 void DataMatrix::Info() const {
-    size_t n = _data.size();
-    size_t m = _columnNames.size();
+    auto [n, m] = Shape();
     std::cout << "Data matrix has shape " << n << " x " << m << '\n';
 
     size_t rowsToShow = n > 3 ? 3 : n;
@@ -69,4 +68,14 @@ void DataMatrix::Info() const {
     std:: cout << '\n';
 
     std::cout << "Dependent variable is " << _dependentVarName << std::endl;
+}
+
+double DataMatrix::DependentVarAt(size_t ind) const {
+    return _data[ind][DependentVarInd()];
+}
+
+std::vector<double> DataMatrix::DescribingVarsAt(size_t ind) const {
+    auto row = _data[ind];
+    row.erase(row.begin() + DependentVarInd());
+    return row;
 }
