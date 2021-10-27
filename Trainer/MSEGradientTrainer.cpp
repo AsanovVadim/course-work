@@ -1,10 +1,7 @@
 #include "MSEGradientTrainer.h"
 #include "VectorLib.h"
 
-const double STEP_SIZE = 0.01;
-const double MAX_ITERATIONS = 1'000'000;
-
-MSEGradientTrainer::MSEGradientTrainer(double precision, const DataMatrix &data): Trainer(precision), _data(data) {}
+MSEGradientTrainer::MSEGradientTrainer(double precision, const DataMatrix &data): Trainer(precision, data) {}
 
 /*
  * класс реализовывает градиентный спуск для метода наименьшиих квадратов
@@ -25,21 +22,4 @@ std::vector<double> MSEGradientTrainer::Gradient(std::vector<double> weights) co
         gradient[variableInd] = 2 * sum / n;
     }
     return gradient;
-}
-
-std::vector<double> MSEGradientTrainer::Fit() {
-    auto [n, m] = _data.Shape();
-    std::vector<double>weights(m - 1, 0); // всего m столбов, один из них зависимый, Инициализируем веса нулями
-
-    double difference = 2 * _precision;              //норма разности весов между соседними итерациями
-    int iterationNumber = 0;
-    std::vector<double> new_weights(weights.size());
-
-    while (difference > _precision && iterationNumber < MAX_ITERATIONS) {
-        new_weights = weights - STEP_SIZE * Gradient(weights);
-        difference = Norm(new_weights - weights, 2);
-        weights = new_weights;
-        iterationNumber += 1;
-    }
-    return weights;
 }
