@@ -15,6 +15,7 @@ DataMatrix::DataMatrix(const std::string& path) {
     while (std::getline(file, line)) {
         std::stringstream ss(line);
         if (readNames) {
+            _columnNames.push_back("bias");
             std::string name;
             while (std::getline(ss, name, ',')) {
                 _columnNames.push_back(name);
@@ -22,6 +23,7 @@ DataMatrix::DataMatrix(const std::string& path) {
             readNames = false;
         } else {
             std::vector<double> row;
+            row.push_back(1);
             double x;
             while (ss >> x) {
                 ss.ignore(1);
