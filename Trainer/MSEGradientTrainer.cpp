@@ -1,8 +1,6 @@
 #include "MSEGradientTrainer.h"
 #include "VectorLib.h"
 
-MSEGradientTrainer::MSEGradientTrainer(double precision, const DataMatrix &data): Trainer(precision, data) {}
-
 /*
  * класс реализовывает градиентный спуск для метода наименьшиих квадратов
  * то есть Q(w, X, y) = 1/n * sum(((x,w) - y)^2) -> min методом градиентного спуска

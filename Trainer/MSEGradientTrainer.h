@@ -5,7 +5,7 @@
 
 class MSEGradientTrainer : public Trainer {
 public:
-    MSEGradientTrainer(double precision, const DataMatrix& data);
+    MSEGradientTrainer(double precision, const DataMatrix& data): Trainer(precision, data) {};
 
 private:
     std::vector<double> Gradient(std::vector<double> weights) const override;
