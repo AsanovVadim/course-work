@@ -1,4 +1,4 @@
-#include "MSEGradientTrainer.h"
+#include "CommonGradient.h"
 #include "VectorLib.h"
 
 /*
@@ -7,14 +7,14 @@
  * для этого необходимо высчитывать вектор градиента в точке w (переменные веса)
  * производная по каждой переменной wi равна 2/n * sum(((x,w) - y) * xi)
  */
-std::vector<double> MSEGradientTrainer::Gradient(std::vector<double> weights) const {
-    auto [n, m] = _data.Shape();
+std::vector<double> CommonGradient::Gradient(const std::vector<double>& weights, const DataMatrix& data) const {
+    auto [n, m] = data.Shape();
     std::vector<double> gradient(m - 1);
     for (size_t variableInd = 0; variableInd < gradient.size(); ++variableInd) {
         double sum = 0;
         for (size_t i = 0 ; i < n; ++i) {
-            auto descriptiveVars = _data.DescribingVarsAt(i);
-            auto dependentVar = _data.DependentVarAt(i);
+            auto descriptiveVars = data.DescribingVarsAt(i);
+            auto dependentVar = data.DependentVarAt(i);
             sum += (Dot(weights, descriptiveVars) - dependentVar) * descriptiveVars[variableInd];
         }
         gradient[variableInd] = 2 * sum / n;
