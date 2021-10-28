@@ -85,3 +85,7 @@ std::vector<double> DataMatrix::DescribingVarsAt(size_t ind) const {
     row.erase(row.begin() + DependentVarInd());
     return row;
 }
+
+std::vector<std::string> DataMatrix::GetColumnNames() const {
+    return _columnNames;
+}

@@ -29,6 +29,7 @@ public:
 
     double DependentVarAt(size_t ind) const;
     std::vector<double>DescribingVarsAt(size_t ind) const;
+    std::vector<std::string> GetColumnNames() const;
 
 private:
     std::vector<std::string> _columnNames;
