@@ -8,40 +8,44 @@
 
 DataMatrix::DataMatrix(const std::string& path) {
     std::ifstream file(path);
-    std::cout << "Generating matrix from " << path << std::endl;
-    std::string line;
-    bool readNames = true;
+    if (!file) {
+        throw std::invalid_argument("Failed to open file " + path);
+    } else {
+        std::cout << "Generating matrix from " << path << std::endl;
+        std::string line;
+        bool readNames = true;
 
-    while (std::getline(file, line)) {
-        std::stringstream ss(line);
-        if (readNames) {
-            _columnNames.push_back("bias");
-            std::string name;
-            while (std::getline(ss, name, ',')) {
-                _columnNames.push_back(name);
+        while (std::getline(file, line)) {
+            std::stringstream ss(line);
+            if (readNames) {
+                _columnNames.push_back("bias");
+                std::string name;
+                while (std::getline(ss, name, ',')) {
+                    _columnNames.push_back(name);
+                }
+                readNames = false;
+            } else {
+                std::vector<double> row;
+                row.push_back(1);
+                double x;
+                while (ss >> x) {
+                    ss.ignore(1);
+                    row.push_back(x);
+                }
+                _data.push_back(row);
             }
-            readNames = false;
-        } else {
-            std::vector<double> row;
-            row.push_back(1);
-            double x;
-            while (ss >> x) {
-                ss.ignore(1);
-                row.push_back(x);
-            }
-            _data.push_back(row);
         }
-    }
 
-    std::cout << "Enter dependent variable name:";
-    std::cin >> _dependentVarName;
-
-    while (std::count(_columnNames.begin(), _columnNames.end(), _dependentVarName) == 0) {
-        std::cout << "There is no column " << _dependentVarName << ". Try again" << std::endl;
         std::cout << "Enter dependent variable name:";
         std::cin >> _dependentVarName;
+
+        while (std::count(_columnNames.begin(), _columnNames.end(), _dependentVarName) == 0) {
+            std::cout << "There is no column " << _dependentVarName << ". Try again" << std::endl;
+            std::cout << "Enter dependent variable name:";
+            std::cin >> _dependentVarName;
+        }
+        std::cout << std::endl;
     }
-    std::cout << std::endl;
 }
 
 size_t DataMatrix::DependentVarInd() const {
