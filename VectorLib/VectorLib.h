@@ -4,9 +4,13 @@
 #include <vector>
 #include <numeric>
 #include <cmath>
+#include <stdexcept>
 
 template <typename T>
 T Dot(const std::vector<T>& v1, const std::vector<T>& v2) {
+    if (v1.size() != v2.size()) {
+        throw std::invalid_argument("Unable to perform operation on vectors with different length.");
+    }
     double res = 0;
     for (size_t i = 0; i < v1.size(); ++i) {
         res += v1[i] * v2[i];
@@ -16,6 +20,9 @@ T Dot(const std::vector<T>& v1, const std::vector<T>& v2) {
 
 template <typename T>
 std::vector<T> operator- (const std::vector<T>& v1, const std::vector<T>& v2) {
+    if (v1.size() != v2.size()) {
+        throw std::invalid_argument("Unable to perform operation on vectors with different length.");
+    }
     std::vector<T> res(v1.size());
     for (size_t i = 0; i < v1.size(); ++i) {
         res[i] = v1[i] - v2[i];
@@ -25,6 +32,9 @@ std::vector<T> operator- (const std::vector<T>& v1, const std::vector<T>& v2) {
 
 template <typename T>
 std::vector<T> operator+ (const std::vector<T>& v1, const std::vector<T>& v2) {
+    if (v1.size() != v2.size()) {
+        throw std::invalid_argument("Unable to perform operation on vectors with different length.");
+    }
     std::vector<T> res(v1.size());
     for (size_t i = 0; i < v1.size(); ++i) {
         res[i] = v1[i] + v2[i];
