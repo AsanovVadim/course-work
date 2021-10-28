@@ -14,19 +14,15 @@
  */
 class Trainer {
 public:
-    Trainer(double precision, const DataMatrix& data, GradientCalculator* gc) : _gradientCalculator(gc),
-                                                                                _precision(precision),
-                                                                                _data(data) {};
+    Trainer(double precision, GradientCalculator* gc) : _gradientCalculator(gc), _precision(precision) {};
     ~Trainer() {
         delete _gradientCalculator;
     }
-    std::vector<double> Fit();
+    std::vector<double> Fit(const DataMatrix& data) const;
 
 protected:
     GradientCalculator* _gradientCalculator;
     double _precision;
-    DataMatrix _data;
-
 };
 
 #endif //COURSEWORK_TRAINER_H
