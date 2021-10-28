@@ -7,7 +7,9 @@ void Model::Fit(const DataMatrix& data) {
     _weightNames = data.GetColumnNames();
     _weightNames.erase(_weightNames.begin() + data.DependentVarInd());
 
+    std::cout << "Fitting..." << std::endl;
     _weights = _trainer->Fit(data);
+    std::cout << "Fitted." << std::endl;
 }
 
 double Model::Predict(const DataMatrix &data) const {
