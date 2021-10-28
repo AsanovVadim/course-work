@@ -23,6 +23,15 @@ std::vector<T> operator- (const std::vector<T>& v1, const std::vector<T>& v2) {
     return res;
 }
 
+template <typename T>
+std::vector<T> operator+ (const std::vector<T>& v1, const std::vector<T>& v2) {
+    std::vector<T> res(v1.size());
+    for (size_t i = 0; i < v1.size(); ++i) {
+        res[i] = v1[i] + v2[i];
+    }
+    return res;
+}
+
 template <typename NumberType>
 NumberType Norm(const std::vector<NumberType>& v, int order) {
     NumberType init = 0;

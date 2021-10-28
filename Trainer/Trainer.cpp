@@ -13,8 +13,8 @@ std::vector<double> Trainer::Fit() {
     std::vector<double> new_weights(weights.size());
 
     while (difference > _precision && iterationNumber < MAX_ITERATIONS) {
-        //метод Gradient() будет реализован в дочерних классах.
-        //сам алогитм минимизации у всех одинаковый и наследуюется из этого класса
+        //метод Gradient() будет реализован в gradientCalculator.
+        //сам алогитм минимизации у всех одинаковый и берется из этого класса
         new_weights = weights - STEP_SIZE * _gradientCalculator->Gradient(weights, _data);
         difference = Norm(new_weights - weights, 2);
         weights = new_weights;
