@@ -14,8 +14,10 @@
 class Lasso: public GradientCalculator {
 public:
     Lasso(GradientCalculator* gc, double lambda): _gradientCalculator(gc), _lambda(lambda) {};
+    ~Lasso() {
+        delete _gradientCalculator;
+    }
     std::vector<double> Gradient(const std::vector<double>& weights, const DataMatrix& data) const override;
-    ~Lasso() { delete _gradientCalculator; };
 
 private:
     GradientCalculator* _gradientCalculator;

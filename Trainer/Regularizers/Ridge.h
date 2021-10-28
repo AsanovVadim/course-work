@@ -10,8 +10,10 @@
 class Ridge: public GradientCalculator {
 public:
     Ridge(GradientCalculator* gc, double lambda): _gradientCalculator(gc), _lambda(lambda) {};
+    ~Ridge() {
+        delete _gradientCalculator;
+    }
     std::vector<double> Gradient(const std::vector<double>& weights, const DataMatrix& data) const override;
-    ~Ridge() { delete _gradientCalculator; };
 
 private:
     GradientCalculator* _gradientCalculator;
