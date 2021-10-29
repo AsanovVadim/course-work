@@ -36,6 +36,11 @@ DataMatrix::DataMatrix(const std::string& path) {
             }
         }
 
+        std::cout << "Matrix has following columns\n";
+        for (size_t i = 1; i < _columnNames.size(); ++i) {
+            std::cout  << _columnNames[i] << " ";
+        }
+        std::cout << '\n';
         std::cout << "Enter dependent variable name:";
         std::cin >> _dependentVarName;
 
