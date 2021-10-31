@@ -1,11 +1,11 @@
-#include "ModelFactory.h"
+#include "LinRegFactory.h"
 #include "CommonGradient.h"
 #include "StochasticGradient.h"
 #include "Lasso.h"
 #include "Ridge.h"
 #include "LinearRegressionPredictor.h"
 
-Model* ModelFactory::CreateLinReg(bool withStochastic, double precision) const {
+Model* LinRegFactory::CreateLinReg(bool withStochastic, double precision) const {
     GradientCalculator* gradientCalculator;
     if (withStochastic) {
         gradientCalculator = new StochasticGradient();
@@ -18,7 +18,7 @@ Model* ModelFactory::CreateLinReg(bool withStochastic, double precision) const {
     return new Model(trainer, predictor);
 }
 
-Model* ModelFactory::CreateLinRegLasso(bool withStochastic, double precision, double lambda) const {
+Model* LinRegFactory::CreateLinRegLasso(bool withStochastic, double precision, double lambda) const {
     GradientCalculator* gradientCalculator;
     if (withStochastic) {
         gradientCalculator = new StochasticGradient();
@@ -32,7 +32,7 @@ Model* ModelFactory::CreateLinRegLasso(bool withStochastic, double precision, do
     return new Model(trainer, predictor);
 }
 
-Model* ModelFactory::CreateLinRegRidge(bool withStochastic, double precision, double lambda) const {
+Model* LinRegFactory::CreateLinRegRidge(bool withStochastic, double precision, double lambda) const {
     GradientCalculator* gradientCalculator;
     if (withStochastic) {
         gradientCalculator = new StochasticGradient();
@@ -46,10 +46,10 @@ Model* ModelFactory::CreateLinRegRidge(bool withStochastic, double precision, do
     return new Model(trainer, predictor);
 }
 
-Model* ModelFactory::CreateLinRegLassoRidge(bool withStochastic,
-                                            double precision,
-                                            double lambdaLasso,
-                                            double lambdaRidge) const {
+Model* LinRegFactory::CreateLinRegLassoRidge(bool withStochastic,
+                                             double precision,
+                                             double lambdaLasso,
+                                             double lambdaRidge) const {
     GradientCalculator* gradientCalculator;
     if (withStochastic) {
         gradientCalculator = new StochasticGradient();
