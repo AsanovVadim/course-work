@@ -15,7 +15,7 @@ public:
     virtual double Predict(const std::vector<double>& weights, const std::vector<double>& data) const = 0;
 
     // вычисляет ошибку (mse) на матрице data (в которой есть и описывающие переменные и правильные ответы)
-    double Predict(const std::vector<double>& weights, const DataMatrix& data) const;
+    virtual double Predict(const std::vector<double>& weights, const DataMatrix& data) const;
 };
 
 #endif //COURSEWORK_PREDICTOR_H
