@@ -1,5 +1,5 @@
 #include "DataMatrix.h"
-#include "ModelFactory.h"
+#include "LinRegFactory.h"
 
 #include <fstream>
 #include <iostream>
