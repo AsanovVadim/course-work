@@ -12,7 +12,7 @@ int main() {
         DataMatrix dm(path);
         dm.Info();
 
-        auto mf = new ModelFactory();
+        auto mf = new LinRegFactory();
         auto model = mf->CreateLinRegLasso(true, 0.0000000000000001, 0.01);
 
         model->Fit(dm);
